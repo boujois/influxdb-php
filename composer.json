@@ -1,0 +1,16 @@
+{
+    "name": "boujois/influxdb-php",
+    "description": "Lightweight PHP client for InfluxDB",
+    "license": "BSD-4-Clause",
+    "version": "v0.1.0",
+    "authors": [
+        {
+            "name": "Daniel Bougourd",
+            "email": "boujois@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "classmap":["lib/"]
+    }
+}
