@@ -7,6 +7,7 @@ class influx {
 	public $pass;
 	public $server;
 	public $port;
+	public $db;
 
 	public function __construct($user, $pass, $server, $port){
 		$this->user      = $user;
@@ -35,6 +36,23 @@ class influx {
 		$query_string_array=$this->add_credentials();
 		$query_string=http_build_query($query_string_array);
 		$output=$this->curl_get("db",$query_string);
+		return(json_decode($output,TRUE));
+	}
+
+	public function select_database($db){
+		$this->db=$db;
+	}
+
+	public function query($query){
+		if(!isset($this->db)){
+			$output["error"]="you must use select_database() first";
+			return $output;
+		}
+		$query_string_array=array();
+		$query_string_array=$this->add_credentials();
+		$query_string_array["q"]=$query;
+		$query_string=http_build_query($query_string_array);
+		$output=$this->curl_get("db/".$this->db."/series",$query_string);
 		return(json_decode($output,TRUE));
 	}
 

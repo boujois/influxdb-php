@@ -4,8 +4,10 @@ require_once('../../lib/influxdb-php/class.influxdb.php');
 use boujois\influxdb\influx as influx;
 
 $influx = new influx("demo","demo","http://localhost","8086");
+$influx->select_database("mydb");
+$result=$influx->query("select * from foo");
 
-echo "Databases: \n";
-print_r($influx->show_databases());
+echo "Result: \n";
+print_r($result);
 
 ?>
